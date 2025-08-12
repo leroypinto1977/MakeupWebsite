@@ -9,10 +9,12 @@ import BlogHomepage from "./pages/blog-homepage";
 import ServicesOverview from "./pages/services-overview";
 import BookingSystem from "./pages/booking-system";
 import Homepage from "./pages/homepage";
+import { Analytics } from "@vercel/analytics/react";
 
 const Routes = () => {
   return (
     <BrowserRouter>
+      <Analytics />
       <ErrorBoundary>
         <ScrollToTop />
         <RouterRoutes>
