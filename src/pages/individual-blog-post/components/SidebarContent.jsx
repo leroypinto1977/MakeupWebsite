@@ -1,24 +1,27 @@
-import React from 'react';
-import TableOfContents from './TableOfContents';
-import AuthorProfile from './AuthorProfile';
-import PopularPosts from './PopularPosts';
-import NewsletterSignup from './NewsletterSignup';
+import React from "react";
+import TableOfContents from "./TableOfContents";
+import AuthorProfile from "./AuthorProfile";
+import PopularPosts from "./PopularPosts";
+import NewsletterSignup from "./NewsletterSignup";
 
 const SidebarContent = ({ content, author, onNewsletterSignup }) => {
   return (
-    <aside className="space-y-8">
-      {/* Table of Contents */}
+    <>
+      {/* Table of Contents - Independent sticky container */}
       <TableOfContents content={content} />
-      
-      {/* Author Profile */}
-      <AuthorProfile author={author} />
-      
-      {/* Popular Posts */}
-      <PopularPosts />
-      
-      {/* Newsletter Signup */}
-      <NewsletterSignup onSignup={onNewsletterSignup} />
-    </aside>
+
+      {/* Other sidebar content - Non-sticky */}
+      <aside className="space-y-8 mt-8">
+        {/* Author Profile */}
+        <AuthorProfile author={author} />
+
+        {/* Popular Posts */}
+        <PopularPosts />
+
+        {/* Newsletter Signup */}
+        <NewsletterSignup onSignup={onNewsletterSignup} />
+      </aside>
+    </>
   );
 };
 

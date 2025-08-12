@@ -4,6 +4,7 @@ import Icon from "../../../components/AppIcon";
 const TableOfContents = ({ content }) => {
   const [activeSection, setActiveSection] = useState("");
   const [isSticky, setIsSticky] = useState(false);
+  const [readingProgress, setReadingProgress] = useState(0);
 
   const tableOfContents = [
     { id: "introduction", title: "Introduction", level: 1 },
@@ -16,8 +17,54 @@ const TableOfContents = ({ content }) => {
   ];
 
   useEffect(() => {
-    // Sticky control
-    const handleSticky = () => setIsSticky(window.scrollY > 300);
+    // Enhanced sticky control - stick until end of blog content
+    const handleSticky = () => {
+      const scrollY = window.scrollY;
+      const startSticky = 300;
+
+      // Calculate reading progress
+      const articleContent = document.querySelector(".lg\\:col-span-3");
+      if (articleContent) {
+        const articleStart = articleContent.offsetTop;
+        const articleHeight = articleContent.offsetHeight;
+        const windowHeight = window.innerHeight;
+        const scrolled = Math.max(0, scrollY - articleStart);
+        const maxScroll = articleHeight - windowHeight;
+        const progress = Math.min(
+          100,
+          Math.max(0, (scrolled / maxScroll) * 100)
+        );
+        setReadingProgress(Math.round(progress));
+      } else {
+        // Fallback to document-based calculation
+        const docHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const progress = Math.min(
+          100,
+          Math.max(0, (scrollY / docHeight) * 100)
+        );
+        setReadingProgress(Math.round(progress));
+      }
+
+      // Aggressive sticky logic - stay sticky almost until the very end
+      const docHeight = document.documentElement.scrollHeight;
+      const windowHeight = window.innerHeight;
+
+      // Calculate a very late end point to ensure TOC stays sticky
+      let endPoint = docHeight - windowHeight - 100; // Only stop 100px before absolute end
+
+      // Only stop for footer if it's very close to the bottom
+      const footer = document.querySelector("footer");
+      if (footer) {
+        const footerDistance = footer.offsetTop - windowHeight;
+        if (footerDistance > scrollY) {
+          endPoint = Math.max(endPoint, footerDistance - 50);
+        }
+      }
+
+      setIsSticky(scrollY > startSticky && scrollY < endPoint);
+    };
+
     window.addEventListener("scroll", handleSticky);
     handleSticky();
 
@@ -74,8 +121,13 @@ const TableOfContents = ({ content }) => {
   return (
     <div
       className={`transition-all duration-300 ${
-        isSticky ? "sticky top-28" : ""
+        isSticky ? "sticky top-28 z-30" : ""
       }`}
+      style={{
+        position: isSticky ? "sticky" : "relative",
+        top: isSticky ? "7rem" : "auto",
+        zIndex: isSticky ? 30 : "auto",
+      }}
     >
       <div className="bg-card rounded-lg p-6 card-elevation">
         <div className="flex items-center mb-4">
@@ -109,12 +161,12 @@ const TableOfContents = ({ content }) => {
         <div className="mt-6 pt-4 border-t border-border">
           <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
             <span>Reading Progress</span>
-            <span>75%</span>
+            <span>{readingProgress}%</span>
           </div>
           <div className="w-full bg-border rounded-full h-2">
             <div
               className="bg-primary h-2 rounded-full transition-all duration-300"
-              style={{ width: "75%" }}
+              style={{ width: `${readingProgress}%` }}
             ></div>
           </div>
         </div>
