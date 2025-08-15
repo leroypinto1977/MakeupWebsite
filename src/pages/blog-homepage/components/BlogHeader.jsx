@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Icon from '../../../components/AppIcon';
-import Input from '../../../components/ui/Input';
+import React, { useState } from "react";
+import Icon from "../../../components/AppIcon";
+import Input from "../../../components/ui/Input";
 
 const BlogHeader = ({ onSearch, searchQuery }) => {
-  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery || '');
+  const [localSearchQuery, setLocalSearchQuery] = useState(searchQuery || "");
 
   const handleSearchChange = (e) => {
     const value = e?.target?.value;
@@ -12,8 +12,8 @@ const BlogHeader = ({ onSearch, searchQuery }) => {
   };
 
   const handleSearchClear = () => {
-    setLocalSearchQuery('');
-    onSearch('');
+    setLocalSearchQuery("");
+    onSearch("");
   };
 
   return (
@@ -22,11 +22,12 @@ const BlogHeader = ({ onSearch, searchQuery }) => {
         <div className="max-w-4xl mx-auto text-center">
           {/* Blog Title & Tagline */}
           <div className="mb-8">
-            <h1 className="text-3xl lg:text-5xl font-heading font-semibold text-foreground mb-4 text-gradient">
+            <h1 className="text-3xl lg:text-5xl font-heading font-semibold text-foreground mb-4 pb-8 text-gradient">
               Beauty & Bridal Blog
             </h1>
             <p className="text-lg lg:text-xl font-body text-muted-foreground max-w-2xl mx-auto">
-              Expert tips, tutorials, and trends to help you look and feel your absolute best on your special day
+              Expert tips, tutorials, and trends to help you look and feel your
+              absolute best on your special day
             </p>
           </div>
 
@@ -40,10 +41,10 @@ const BlogHeader = ({ onSearch, searchQuery }) => {
                 onChange={handleSearchChange}
                 className="pl-12 pr-12"
               />
-              <Icon 
-                name="Search" 
-                size={20} 
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none" 
+              <Icon
+                name="Search"
+                size={20}
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 text-muted-foreground pointer-events-none"
               />
               {localSearchQuery && (
                 <button

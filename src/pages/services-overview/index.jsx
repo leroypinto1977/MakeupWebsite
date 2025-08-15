@@ -219,7 +219,18 @@ const ServicesOverview = () => {
   return (
     <>
       <Helmet>
-        <title>Services Overview - Bella Bridal Studio</title>
+        <title>
+          Bridal Makeup Services & Wedding Beauty Packages | Vyara Professional
+          Makeup Artist
+        </title>
+        <meta
+          name="description"
+          content="Explore Vyara's comprehensive bridal makeup services and wedding beauty packages. Professional makeup artistry for Indian weddings, destination ceremonies, and special occasions in Namakkal, Tamil Nadu."
+        />
+        <meta
+          name="keywords"
+          content="bridal makeup services, wedding makeup packages, Indian bridal makeup, professional makeup artist, bridal beauty services, wedding makeup artist Namakkal, Tamil Nadu makeup artist, destination wedding makeup, bridal makeup pricing, makeup artist services"
+        />
         <meta
           name="description"
           content="Explore our comprehensive range of bridal and party makeup services. From complete bridal packages to trial sessions, find the perfect service for your special occasion."

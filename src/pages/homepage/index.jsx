@@ -17,12 +17,12 @@ const Homepage = () => {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "BeautySalon",
-    name: "Bella Bridal Studio",
+    name: "Vyara",
     description:
       "Professional bridal makeup artistry that enhances your natural beauty and creates unforgettable moments for your special day.",
-    url: "https://bellabridal.com",
+    url: "https://vyara.com",
     telephone: "(555) 123-4567",
-    email: "hello@bellabridal.com",
+    email: "hello@vyara.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "123 Beauty Lane",
@@ -82,45 +82,45 @@ const Homepage = () => {
     <>
       <Helmet>
         <title>
-          Bella Bridal Studio - Professional Bridal Makeup Artist | San
-          Francisco
+          Vyara - Professional Bridal Makeup Artist | Wedding Makeup Tips &
+          Tutorials
         </title>
         <meta
           name="description"
-          content="Transform your special day with professional bridal makeup artistry. Expert makeup services for weddings, parties, and special occasions in San Francisco. Book your consultation today."
+          content="Expert bridal makeup artist Vyara offers professional wedding makeup, beauty tips & tutorials. Specializing in Indian bridal makeup, destination weddings, and makeup artistry in Namakkal, Tamil Nadu. Book your bridal makeup consultation today!"
         />
         <meta
           name="keywords"
-          content="bridal makeup, wedding makeup artist, San Francisco makeup artist, professional makeup, party makeup, trial session, beauty services"
+          content="bridal makeup artist, wedding makeup, Indian bridal makeup, bridal makeup tips, makeup tutorials, wedding beauty tips, professional makeup artist, Namakkal makeup artist, Tamil Nadu bridal makeup, destination wedding makeup, bridal beauty, makeup artistry, wedding makeup artist near me, bridal makeup packages, makeup tips and tricks"
         />
 
         {/* Open Graph Tags */}
         <meta
           property="og:title"
-          content="Bella Bridal Studio - Professional Bridal Makeup Artist"
+          content="Vyara - Professional Bridal Makeup Artist | Wedding Makeup & Beauty Tips"
         />
         <meta
           property="og:description"
-          content="Transform your special day with professional bridal makeup artistry that enhances your natural beauty and creates unforgettable moments."
+          content="Expert bridal makeup artist specializing in Indian weddings, beauty tutorials & makeup tips. Professional makeup artistry for your special day in Namakkal, Tamil Nadu."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://bellabridal.com" />
+        <meta property="og:url" content="https://vyara.com" />
         <meta
           property="og:image"
           content="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80"
         />
         <meta property="og:locale" content="en_US" />
-        <meta property="og:site_name" content="Bella Bridal Studio" />
+        <meta property="og:site_name" content="Vyara" />
 
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content="Bella Bridal Studio - Professional Bridal Makeup Artist"
+          content="Vyara - Professional Bridal Makeup Artist | Wedding Makeup & Beauty Tips"
         />
         <meta
           name="twitter:description"
-          content="Transform your special day with professional bridal makeup artistry that enhances your natural beauty."
+          content="Expert bridal makeup artist specializing in Indian weddings, beauty tutorials & makeup tips. Professional makeup artistry in Namakkal, Tamil Nadu."
         />
         <meta
           name="twitter:image"
@@ -129,9 +129,9 @@ const Homepage = () => {
 
         {/* Additional Meta Tags */}
         <meta name="robots" content="index, follow" />
-        <meta name="author" content="Bella Bridal Studio" />
+        <meta name="author" content="Vyara" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="canonical" href="https://bellabridal.com" />
+        <link rel="canonical" href="https://vyara.com" />
 
         {/* Structured Data */}
         <script type="application/ld+json">

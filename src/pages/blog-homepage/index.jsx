@@ -376,16 +376,16 @@ const BlogHomepage = () => {
     <>
       <Helmet>
         <title>
-          Beauty & Bridal Blog - Expert Tips, Tutorials & Trends | Bella Bridal
-          Studio
+          Bridal Makeup Tips & Beauty Tutorials | Vyara Beauty Blog - Expert
+          Wedding Makeup Advice
         </title>
         <meta
           name="description"
-          content="Discover expert beauty tips, bridal makeup tutorials, and the latest trends. Get professional advice from certified makeup artists and skincare specialists."
+          content="Discover expert bridal makeup tips, wedding beauty tutorials, and professional makeup advice from Vyara. Learn makeup techniques, skincare tips, and beauty secrets for your perfect wedding day look."
         />
         <meta
           name="keywords"
-          content="bridal makeup, beauty tips, wedding makeup, skincare routine, makeup tutorials, bridal beauty blog"
+          content="bridal makeup tips, wedding makeup tutorials, makeup tips and tricks, beauty blog, Indian bridal makeup tips, wedding beauty advice, makeup techniques, skincare tips, bridal beauty tutorials, makeup artist blog, wedding makeup guide, beauty tips for brides"
         />
         <meta
           property="og:title"
@@ -396,25 +396,22 @@ const BlogHomepage = () => {
           content="Expert beauty tips, bridal makeup tutorials, and trends from professional makeup artists."
         />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://bellabridal.com/blog-homepage"
-        />
-        <link rel="canonical" href="https://bellabridal.com/blog-homepage" />
+        <meta property="og:url" content="https://vyara.com/blog" />
+        <link rel="canonical" href="https://vyara.com/blog" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
-            name: "Bella Bridal Studio Blog",
+            name: "Vyara Blog",
             description:
               "Expert beauty tips, bridal makeup tutorials, and trends",
-            url: "https://bellabridal.com/blog-homepage",
+            url: "https://vyara.com/blog",
             publisher: {
               "@type": "Organization",
-              name: "Bella Bridal Studio",
+              name: "Vyara",
               logo: {
                 "@type": "ImageObject",
-                url: "https://bellabridal.com/logo.png",
+                url: "https://vyara.com/logo.png",
               },
             },
           })}

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/ui/Header";
-import Breadcrumb from "../../components/ui/Breadcrumb";
 import HeroSection from "./components/HeroSection";
 import TabNavigation from "./components/TabNavigation";
 import PackageCard from "./components/PackageCard";
@@ -87,16 +86,6 @@ const BridalPackageDetails = () => {
     },
   ];
 
-  const breadcrumbItems = [
-    { label: "Home", path: "/", icon: "Home" },
-    { label: "Services", path: "/services-overview", icon: "Sparkles" },
-    {
-      label: "Bridal Packages",
-      path: "/bridal-package-details",
-      icon: "Crown",
-    },
-  ];
-
   const handleBookConsultation = (packageData = null) => {
     if (packageData) {
       setSelectedPackage(packageData);
@@ -150,7 +139,8 @@ const BridalPackageDetails = () => {
               </span>
               <button
                 onClick={() => setShowMonthlyPayment(!showMonthlyPayment)}
-                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-smooth focus-ring ${
+                onMouseDown={(e) => e.preventDefault()}
+                className={`relative inline-flex h-6 w-11 items-center rounded-full transition-smooth focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none ${
                   showMonthlyPayment ? "bg-primary" : "bg-muted"
                 }`}
               >
@@ -228,21 +218,27 @@ const BridalPackageDetails = () => {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <Breadcrumb customItems={breadcrumbItems} />
 
       {/* Hero Section */}
       <HeroSection onBookConsultation={handleBookConsultation} />
 
-      {/* Tab Navigation */}
+      {/* Tab Navigation - Full Width & Sticky */}
       <TabNavigation activeTab={activeTab} onTabChange={handleTabChange} />
 
       {/* Tab Content */}
       <main className="py-12 lg:py-16">
-        <div className="container-padding">{renderTabContent()}</div>
+        <div className="w-full mx-auto max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[75%] xl:max-w-[70%] container-padding">
+          {renderTabContent()}
+        </div>
       </main>
 
       {/* Testimonials */}
-      <TestimonialSection />
+      <div
+        id="testimonials-section"
+        className="w-full mx-auto max-w-[95%] sm:max-w-[90%] md:max-w-[85%] lg:max-w-[75%] xl:max-w-[70%]"
+      >
+        <TestimonialSection />
+      </div>
 
       {/* Sticky Booking Widget */}
       <StickyBookingWidget

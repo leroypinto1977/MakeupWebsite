@@ -212,7 +212,7 @@ const IndividualBlogPost = () => {
     },
     publisher: {
       "@type": "Organization",
-      name: "Bella Bridal Studio",
+      name: "Vyara",
       logo: {
         "@type": "ImageObject",
         url: "/logo.png",
@@ -265,7 +265,9 @@ const IndividualBlogPost = () => {
   return (
     <>
       <Helmet>
-        <title>{article?.title} | Bella Bridal Studio Blog</title>
+        <title>
+          {article?.title} | Vyara Beauty Blog - Bridal Makeup Tips & Tutorials
+        </title>
         <meta name="description" content={article?.subtitle} />
         <meta name="keywords" content={article?.tags?.join(", ")} />
 

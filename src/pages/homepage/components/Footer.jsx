@@ -32,19 +32,19 @@ const Footer = () => {
     {
       name: "Instagram",
       icon: "Instagram",
-      url: "https://instagram.com/bellabridal",
+      url: "https://instagram.com/vyara",
     },
     {
       name: "Facebook",
       icon: "Facebook",
-      url: "https://facebook.com/bellabridal",
+      url: "https://facebook.com/vyara",
     },
     {
       name: "Pinterest",
       icon: "Heart",
-      url: "https://pinterest.com/bellabridal",
+      url: "https://pinterest.com/vyara",
     },
-    { name: "TikTok", icon: "Video", url: "https://tiktok.com/@bellabridal" },
+    { name: "TikTok", icon: "Video", url: "https://tiktok.com/@vyara" },
   ];
 
   const handleNavigation = (path) => {
@@ -68,7 +68,7 @@ const Footer = () => {
               </div>
               <h3 className="text-2xl font-heading font-semibold leading-snug">
                 <span className="bg-gradient-to-r from-[#d4a574] to-[#b08d57] bg-clip-text text-transparent">
-                  Bella Bridal Studio
+                  Vyara
                 </span>
               </h3>
             </div>
@@ -84,7 +84,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Icon name="Mail" size={16} className="text-[#d4a574]" />
-                <span>hello@bellabridal.in</span>
+                <span>hello@vyara.com</span>
               </li>
               <li className="flex items-start gap-3">
                 <Icon
@@ -161,7 +161,7 @@ const Footer = () => {
       <div className="relative mt-0 h-[22vh] min-h-[200px] flex items-center justify-center">
         <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
           <span className="font-heading font-extrabold tracking-tight text-white/5 text-center leading-[0.8] text-[20vw] md:text-[17vw] lg:text-[14vw]">
-            BELLA BRIDAL
+            VYARA
           </span>
         </div>
       </div>
@@ -170,8 +170,8 @@ const Footer = () => {
       <div>
         <div className="container-padding py-10 flex flex-col lg:flex-row items-center justify-between gap-8">
           <p className="text-[13px] font-caption text-white/60 text-center lg:text-left max-w-xl">
-            © {currentYear} Bella Bridal Studio — Professional bridal & occasion
-            makeup services in Namakkal, India.
+            © {currentYear} Vyara — Professional bridal & occasion makeup
+            services in Namakkal, India.
           </p>
           <div className="flex items-center gap-5">
             {socialLinks?.map((social) => (

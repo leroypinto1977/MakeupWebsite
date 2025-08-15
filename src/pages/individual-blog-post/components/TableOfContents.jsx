@@ -68,41 +68,86 @@ const TableOfContents = ({ content }) => {
     window.addEventListener("scroll", handleSticky);
     handleSticky();
 
-    // IntersectionObserver for active section
+    // Enhanced IntersectionObserver for more accurate section tracking
     const headerOffset = 120;
     const options = {
       root: null,
-      rootMargin: `-${headerOffset}px 0px -55% 0px`,
-      threshold: [0, 0.25, 0.5, 0.75],
+      rootMargin: `-${headerOffset}px 0px -30% 0px`, // Reduced bottom margin for better detection
+      threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0], // More threshold points
     };
+
     const ids = tableOfContents.map((t) => t.id);
+    const visibleSections = new Map();
+
     const io = new IntersectionObserver((entries) => {
-      const visible = entries
-        .filter((e) => e.isIntersecting)
-        .sort(
-          (a, b) =>
-            a.target.getBoundingClientRect().top -
-            b.target.getBoundingClientRect().top
+      // Update visibility map
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          visibleSections.set(entry.target.id, {
+            ratio: entry.intersectionRatio,
+            top: entry.boundingClientRect.top,
+            element: entry.target,
+          });
+        } else {
+          visibleSections.delete(entry.target.id);
+        }
+      });
+
+      // Determine active section with improved logic
+      if (visibleSections.size > 0) {
+        // Sort by intersection ratio and position
+        const sortedSections = Array.from(visibleSections.entries()).sort(
+          (a, b) => {
+            const [idA, dataA] = a;
+            const [idB, dataB] = b;
+
+            // Prioritize sections with higher intersection ratio
+            if (Math.abs(dataA.ratio - dataB.ratio) > 0.1) {
+              return dataB.ratio - dataA.ratio;
+            }
+
+            // If ratios are similar, prefer the one closer to top
+            return Math.abs(dataA.top) - Math.abs(dataB.top);
+          }
         );
-      if (visible.length) {
-        setActiveSection(visible[0].target.id);
+
+        setActiveSection(sortedSections[0][0]);
       } else {
-        // fallback: last section above scroll
-        const y = window.scrollY + headerOffset + 10;
-        let last = ids[0];
-        ids.forEach((id) => {
-          const el = document.getElementById(id);
-          if (el && el.offsetTop <= y) last = id;
-        });
-        setActiveSection(last);
+        // Fallback: find the last section that has been scrolled past
+        const currentScroll = window.scrollY + headerOffset;
+        let activeId = ids[0]; // Default to first section
+
+        for (let i = 0; i < ids.length; i++) {
+          const element = document.getElementById(ids[i]);
+          if (element && element.offsetTop <= currentScroll) {
+            activeId = ids[i];
+          } else {
+            break; // Stop at first section that hasn't been reached
+          }
+        }
+
+        setActiveSection(activeId);
       }
     }, options);
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) io.observe(el);
-    });
+
+    // Observe all sections with improved timing
+    const observeSections = () => {
+      ids.forEach((id) => {
+        const element = document.getElementById(id);
+        if (element) {
+          io.observe(element);
+        }
+      });
+    };
+
+    // Delay observation to ensure DOM is ready
+    const observeTimeout = setTimeout(observeSections, 100);
+
+    // Also observe immediately in case elements are already ready
+    observeSections();
     return () => {
       window.removeEventListener("scroll", handleSticky);
+      clearTimeout(observeTimeout);
       io.disconnect();
     };
   }, [tableOfContents]);
@@ -110,11 +155,17 @@ const TableOfContents = ({ content }) => {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
-      const offsetTop = element?.offsetTop - 100;
+      const headerHeight = 120; // Account for fixed header
+      const offsetTop = element.offsetTop - headerHeight;
+
+      // Smooth scroll with better easing
       window.scrollTo({
-        top: offsetTop,
+        top: Math.max(0, offsetTop),
         behavior: "smooth",
       });
+
+      // Update active section immediately for better UX
+      setActiveSection(sectionId);
     }
   };
 
@@ -137,19 +188,25 @@ const TableOfContents = ({ content }) => {
           </h3>
         </div>
 
-        <nav className="space-y-2">
+        <nav className="space-y-1">
           {tableOfContents?.map((item) => (
             <button
               key={item?.id}
               onClick={() => scrollToSection(item?.id)}
-              className={`w-full text-left px-3 py-2 rounded-sm transition-smooth focus-ring ${
+              className={`w-full text-left px-3 py-2.5 rounded-md transition-all duration-200 focus-ring group ${
                 activeSection === item?.id
                   ? "bg-primary/10 text-primary font-medium border-l-2 border-primary"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                  : "text-muted-foreground hover:text-foreground hover:bg-accent/70"
               }`}
             >
               <span
-                className={`block text-sm ${item?.level === 2 ? "ml-4" : ""}`}
+                className={`block text-sm transition-all duration-200 ${
+                  item?.level === 2 ? "ml-4" : ""
+                } ${
+                  activeSection === item?.id
+                    ? "transform translate-x-1"
+                    : "group-hover:transform group-hover:translate-x-0.5"
+                }`}
               >
                 {item?.title}
               </span>

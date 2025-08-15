@@ -13,7 +13,7 @@ const TestimonialsSection = () => {
     },
     {
       id: 2,
-      text: "As a bridesmaid at three different weddings with Bella Bridal, I’ve seen consistent quality, care, and artistry every single time!",
+      text: "As a bridesmaid at three different weddings with Vyara, I've seen consistent quality, care, and artistry every single time!",
       author: "Emily R.",
       role: "Bridesmaid & Client",
     },

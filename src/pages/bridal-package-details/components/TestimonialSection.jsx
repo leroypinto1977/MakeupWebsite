@@ -16,7 +16,7 @@ const TestimonialSection = () => {
         "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
       rating: 5,
       date: "June 2024",
-      content: `Bella Bridal Studio made my wedding day absolutely perfect! The trial session was so detailed, and on my wedding day, I felt like a princess. The makeup lasted all day and looked stunning in photos. I can't recommend them enough!`,
+      content: `Vyara made my wedding day absolutely perfect! The trial session was so detailed, and on my wedding day, I felt like a princess. The makeup lasted all day and looked stunning in photos. I can't recommend them enough!`,
       weddingImage:
         "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
       package: "Premium Bridal Package",
@@ -29,7 +29,7 @@ const TestimonialSection = () => {
         "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80",
       rating: 5,
       date: "August 2024",
-      content: `The team at Bella Bridal Studio is incredibly talented and professional. They listened to my vision and created exactly what I wanted. The natural glam look was perfect for my outdoor wedding. Thank you for making me feel so beautiful!`,
+      content: `The team at Vyara is incredibly talented and professional. They listened to my vision and created exactly what I wanted. The natural glam look was perfect for my outdoor wedding. Thank you for making me feel so beautiful!`,
       weddingImage:
         "https://images.unsplash.com/photo-1583900985737-6d0495555783?ixlib=rb-4.0.3&auto=format&fit=crop&w=300&q=80",
       package: "Classic Bridal Package",
@@ -61,18 +61,18 @@ const TestimonialSection = () => {
       const cards = section?.querySelectorAll(".testimonial-card");
       gsap?.fromTo(
         cards,
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 50, scale: 0.95 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power2.out",
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.15,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: section,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse",
+            start: "top 85%",
+            toggleActions: "play none none none",
           },
         }
       );

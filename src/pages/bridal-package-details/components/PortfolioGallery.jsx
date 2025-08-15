@@ -1,86 +1,116 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import Image from '../../../components/AppImage';
-import Icon from '../../../components/AppIcon';
-import Button from '../../../components/ui/Button';
+import React, { useState, useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import Image from "../../../components/AppImage";
+import Icon from "../../../components/AppIcon";
+import Button from "../../../components/ui/Button";
 
 const PortfolioGallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeFilter, setActiveFilter] = useState("all");
   const galleryRef = useRef(null);
   const lightboxRef = useRef(null);
 
   const portfolioImages = [
     {
       id: 1,
-      before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      after: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      before:
+        "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      after:
+        "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       category: "bridal",
       title: "Classic Bridal Look",
-      description: "Timeless elegance with soft glam makeup"
+      description: "Timeless elegance with soft glam makeup",
     },
     {
       id: 2,
-      before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      after: "https://images.unsplash.com/photo-1583900985737-6d0495555783?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      before:
+        "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      after:
+        "https://images.unsplash.com/photo-1583900985737-6d0495555783?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       category: "glam",
       title: "Glamorous Evening Look",
-      description: "Bold and dramatic makeup for special occasions"
+      description: "Bold and dramatic makeup for special occasions",
     },
     {
       id: 3,
-      before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      after: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      before:
+        "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      after:
+        "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       category: "natural",
       title: "Natural Bridal Glow",
-      description: "Soft and natural makeup enhancing natural beauty"
+      description: "Soft and natural makeup enhancing natural beauty",
     },
     {
       id: 4,
-      before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      after: "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      before:
+        "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      after:
+        "https://images.unsplash.com/photo-1594736797933-d0401ba2fe65?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       category: "bridal",
       title: "Vintage Bridal Style",
-      description: "Classic vintage-inspired bridal makeup"
+      description: "Classic vintage-inspired bridal makeup",
     },
     {
       id: 5,
-      before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      after: "https://images.unsplash.com/photo-1583900985737-6d0495555783?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      before:
+        "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      after:
+        "https://images.unsplash.com/photo-1583900985737-6d0495555783?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       category: "glam",
       title: "Red Carpet Glam",
-      description: "High-fashion makeup for glamorous events"
+      description: "High-fashion makeup for glamorous events",
     },
     {
       id: 6,
-      before: "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
-      after: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      before:
+        "https://images.unsplash.com/photo-1616683693504-3ea7e9ad6fec?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      after:
+        "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
       category: "natural",
       title: "Everyday Elegance",
-      description: "Polished natural look for everyday wear"
-    }
+      description: "Polished natural look for everyday wear",
+    },
   ];
 
   const filters = [
-    { id: 'all', label: 'All Looks', count: portfolioImages?.length },
-    { id: 'bridal', label: 'Bridal', count: portfolioImages?.filter(img => img?.category === 'bridal')?.length },
-    { id: 'glam', label: 'Glamorous', count: portfolioImages?.filter(img => img?.category === 'glam')?.length },
-    { id: 'natural', label: 'Natural', count: portfolioImages?.filter(img => img?.category === 'natural')?.length }
+    { id: "all", label: "All Looks", count: portfolioImages?.length },
+    {
+      id: "bridal",
+      label: "Bridal",
+      count: portfolioImages?.filter((img) => img?.category === "bridal")
+        ?.length,
+    },
+    {
+      id: "glam",
+      label: "Glamorous",
+      count: portfolioImages?.filter((img) => img?.category === "glam")?.length,
+    },
+    {
+      id: "natural",
+      label: "Natural",
+      count: portfolioImages?.filter((img) => img?.category === "natural")
+        ?.length,
+    },
   ];
 
-  const filteredImages = activeFilter === 'all' 
-    ? portfolioImages 
-    : portfolioImages?.filter(img => img?.category === activeFilter);
+  const filteredImages =
+    activeFilter === "all"
+      ? portfolioImages
+      : portfolioImages?.filter((img) => img?.category === activeFilter);
 
   useEffect(() => {
     const gallery = galleryRef?.current;
     if (!gallery) return;
 
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')?.matches;
-    
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    )?.matches;
+
     if (!prefersReducedMotion) {
-      const items = gallery?.querySelectorAll('.gallery-item');
-      gsap?.fromTo(items, 
+      const items = gallery?.querySelectorAll(".gallery-item");
+      gsap?.fromTo(
+        items,
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, stagger: 0.1, ease: "power2.out" }
       );
@@ -89,27 +119,27 @@ const PortfolioGallery = () => {
 
   const openLightbox = (image) => {
     setSelectedImage(image);
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
   };
 
   const closeLightbox = () => {
     setSelectedImage(null);
-    document.body.style.overflow = 'unset';
+    document.body.style.overflow = "unset";
   };
 
   useEffect(() => {
     const handleEscape = (e) => {
-      if (e?.key === 'Escape') {
+      if (e?.key === "Escape") {
         closeLightbox();
       }
     };
 
     if (selectedImage) {
-      document.addEventListener('keydown', handleEscape);
+      document.addEventListener("keydown", handleEscape);
     }
 
     return () => {
-      document.removeEventListener('keydown', handleEscape);
+      document.removeEventListener("keydown", handleEscape);
     };
   }, [selectedImage]);
 
@@ -121,10 +151,11 @@ const PortfolioGallery = () => {
           <button
             key={filter?.id}
             onClick={() => setActiveFilter(filter?.id)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-smooth focus-ring ${
+            onMouseDown={(e) => e.preventDefault()}
+            className={`px-4 py-2 rounded-full text-sm font-medium transition-smooth focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:outline-none ${
               activeFilter === filter?.id
-                ? 'bg-primary text-primary-foreground'
-                : 'bg-accent text-foreground hover:bg-primary/10'
+                ? "bg-primary text-primary-foreground"
+                : "bg-accent text-foreground hover:bg-primary/10"
             }`}
           >
             {filter?.label} ({filter?.count})
@@ -132,7 +163,10 @@ const PortfolioGallery = () => {
         ))}
       </div>
       {/* Gallery Grid */}
-      <div ref={galleryRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        ref={galleryRef}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {filteredImages?.map((image) => (
           <div
             key={image?.id}
@@ -164,12 +198,16 @@ const PortfolioGallery = () => {
                     </div>
                   </div>
                 </div>
-                
+
                 {/* Overlay */}
                 <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-smooth flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-smooth">
                     <div className="bg-background/95 backdrop-blur-sm rounded-full p-3">
-                      <Icon name="ZoomIn" size={20} className="text-foreground" />
+                      <Icon
+                        name="ZoomIn"
+                        size={20}
+                        className="text-foreground"
+                      />
                     </div>
                   </div>
                 </div>
@@ -191,12 +229,15 @@ const PortfolioGallery = () => {
       {/* Lightbox Modal */}
       {selectedImage && (
         <div className="fixed inset-0 z-200 flex items-center justify-center p-4">
-          <div 
+          <div
             className="absolute inset-0 bg-foreground/90 backdrop-blur-sm"
             onClick={closeLightbox}
           />
-          
-          <div ref={lightboxRef} className="relative bg-background rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl">
+
+          <div
+            ref={lightboxRef}
+            className="relative bg-background rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-hidden shadow-2xl"
+          >
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-border">
               <div>
@@ -220,7 +261,9 @@ const PortfolioGallery = () => {
             <div className="p-4">
               <div className="grid md:grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-muted-foreground">Before</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground">
+                    Before
+                  </h4>
                   <div className="rounded-lg overflow-hidden">
                     <Image
                       src={selectedImage?.before}
@@ -230,7 +273,9 @@ const PortfolioGallery = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <h4 className="text-sm font-medium text-muted-foreground">After</h4>
+                  <h4 className="text-sm font-medium text-muted-foreground">
+                    After
+                  </h4>
                   <div className="rounded-lg overflow-hidden">
                     <Image
                       src={selectedImage?.after}

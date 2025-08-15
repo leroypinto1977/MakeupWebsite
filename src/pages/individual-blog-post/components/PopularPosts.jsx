@@ -1,7 +1,7 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Icon from '../../../components/AppIcon';
-import Image from '../../../components/AppImage';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Icon from "../../../components/AppIcon";
+import Image from "../../../components/AppImage";
 
 const PopularPosts = () => {
   const navigate = useNavigate();
@@ -10,46 +10,52 @@ const PopularPosts = () => {
     {
       id: 5,
       title: "5 Makeup Mistakes Every Bride Should Avoid",
-      featuredImage: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=300&fit=crop",
+      featuredImage:
+        "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=400&h=300&fit=crop",
       readTime: 6,
       views: 8920,
-      category: "Tips & Tricks"
+      category: "Tips & Tricks",
     },
     {
       id: 6,
       title: "The Ultimate Guide to Waterproof Wedding Makeup",
-      featuredImage: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop",
+      featuredImage:
+        "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop",
       readTime: 10,
       views: 7650,
-      category: "Tutorials"
+      category: "Tutorials",
     },
     {
       id: 7,
       title: "How to Make Your Wedding Makeup Last 12+ Hours",
-      featuredImage: "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop",
+      featuredImage:
+        "https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?w=400&h=300&fit=crop",
       readTime: 8,
       views: 6340,
-      category: "Techniques"
+      category: "Techniques",
     },
     {
       id: 8,
       title: "Choosing Colors That Complement Your Skin Tone",
-      featuredImage: "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=300&fit=crop",
+      featuredImage:
+        "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=300&fit=crop",
       readTime: 7,
       views: 5890,
-      category: "Color Theory"
-    }
+      category: "Color Theory",
+    },
   ];
 
   const handlePostClick = (post) => {
-    navigate('/individual-blog-post', { state: { postId: post?.id } });
+    navigate("/individual-blog-post", { state: { postId: post?.id } });
   };
 
   return (
     <div className="bg-card rounded-lg p-6 card-elevation">
       <div className="flex items-center mb-4">
         <Icon name="TrendingUp" size={20} className="text-primary mr-2" />
-        <h3 className="font-heading font-semibold text-foreground">Popular Articles</h3>
+        <h3 className="font-heading font-semibold text-foreground">
+          Popular Articles
+        </h3>
       </div>
       <div className="space-y-4">
         {popularPosts?.map((post, index) => (
@@ -73,19 +79,19 @@ const PopularPosts = () => {
             </div>
 
             {/* Post Info */}
-            <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-medium text-foreground group-hover:text-primary transition-smooth line-clamp-2 mb-1">
-                {post?.title}
+            <div className="flex-1 min-w-0 overflow-hidden">
+              <h4 className="text-sm font-medium text-foreground group-hover:text-primary transition-smooth mb-1 break-words overflow-hidden">
+                <span className="line-clamp-2">{post?.title}</span>
               </h4>
-              <div className="flex items-center space-x-2 text-xs text-muted-foreground">
-                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+              <div className="flex items-center space-x-2 text-xs text-muted-foreground overflow-hidden">
+                <span className="bg-primary/10 text-primary px-2 py-0.5 rounded-full text-xs whitespace-nowrap">
                   {post?.category}
                 </span>
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-1 whitespace-nowrap">
                   <Icon name="Clock" size={10} />
                   <span>{post?.readTime}m</span>
                 </div>
-                <div className="flex items-center space-x-1">
+                <div className="flex items-center space-x-1 whitespace-nowrap">
                   <Icon name="Eye" size={10} />
                   <span>{(post?.views / 1000)?.toFixed(1)}k</span>
                 </div>
@@ -97,7 +103,7 @@ const PopularPosts = () => {
       {/* View All Link */}
       <div className="mt-4 pt-4 border-t border-border">
         <button
-          onClick={() => navigate('/blog-homepage')}
+          onClick={() => navigate("/blog-homepage")}
           className="w-full text-sm text-primary hover:text-primary/80 transition-smooth flex items-center justify-center space-x-1 focus-ring rounded p-2"
         >
           <span>View All Articles</span>

@@ -149,11 +149,11 @@ const BookingPolicies = () => {
                 <div className="hidden sm:block w-px h-6 bg-border"></div>
 
                 <a
-                  href="mailto:hello@bellabridal.com"
+                  href="mailto:hello@vyara.com"
                   className="flex items-center space-x-2 px-4 py-2 text-primary hover:text-primary/80 transition-smooth"
                 >
                   <Icon name="Mail" size={18} />
-                  <span className="font-medium">hello@bellabridal.com</span>
+                  <span className="font-medium">hello@vyara.com</span>
                 </a>
               </div>
             </div>

@@ -75,12 +75,9 @@ const Header = () => {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <h1 className="text-lg lg:text-xl font-heading font-semibold text-foreground leading-tight">
-                    Bella Bridal
-                  </h1>
-                  <p className="text-xs lg:text-sm font-caption text-muted-foreground -mt-1">
-                    Studio
-                  </p>
+                  <span className="font-heading text-xl lg:text-2xl font-bold text-gradient">
+                    Vyara
+                  </span>
                 </div>
               </div>
             </div>
@@ -147,12 +144,9 @@ const Header = () => {
                     />
                   </div>
                   <div>
-                    <h2 className="font-heading font-semibold text-foreground">
-                      Bella Bridal
+                    <h2 className="font-heading font-semibold text-gradient">
+                      Vyara
                     </h2>
-                    <p className="text-xs font-caption text-muted-foreground">
-                      Studio
-                    </p>
                   </div>
                 </div>
                 <button
