@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import GradientHeading from "../../../components/ui/GradientHeading";
+import { fetchTestimonials } from "../../../lib/sanity";
 
 const TestimonialsSection = () => {
   const sectionRef = useRef(null);
+  const [testimonials, setTestimonials] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const testimonials = [
+  // Mock data as fallback
+  const mockTestimonials = [
     {
       id: 1,
       text: "The trial and wedding day experience were flawless. My makeup felt lightweight yet stayed perfect through tears and dancing.",
@@ -43,8 +47,52 @@ const TestimonialsSection = () => {
     },
   ];
 
-  // Intersection Observer for fade-in animation
+  // Fetch testimonials from Sanity on component mount
   useEffect(() => {
+    const loadTestimonials = async () => {
+      try {
+        console.log("🔄 Loading testimonials from Sanity...");
+        setLoading(true);
+        const data = await fetchTestimonials();
+        console.log("📊 Raw Sanity data:", data);
+
+        // Transform Sanity data to match component structure
+        const transformedTestimonials = data.map((testimonial) => ({
+          id: testimonial._id,
+          text: testimonial.testimonialText,
+          author: testimonial.clientName,
+          role: testimonial.title || "Client", // Use the title field from schema
+        }));
+
+        console.log("✨ Transformed testimonials:", transformedTestimonials);
+
+        if (transformedTestimonials.length > 0) {
+          console.log("✅ Using Sanity testimonials");
+          setTestimonials(transformedTestimonials);
+        } else {
+          console.log("⚠️ No testimonials found in Sanity, using mock data");
+          // Use mock data if no testimonials in CMS
+          setTestimonials(mockTestimonials);
+        }
+      } catch (error) {
+        console.error("❌ Error loading testimonials:", error);
+        // Fallback to mock data if fetch fails
+        console.log("🔄 Falling back to mock data");
+        setTestimonials(mockTestimonials);
+      } finally {
+        setLoading(false);
+        console.log("✨ Testimonials loading complete");
+      }
+    };
+
+    loadTestimonials();
+  }, []);
+
+    // Intersection Observer for fade-in animation
+  useEffect(() => {
+    // Only run when testimonials are loaded and not loading
+    if (loading || testimonials.length === 0) return;
+    
     const cards = sectionRef.current?.querySelectorAll(".fade-in");
     if (!cards?.length) return;
 
@@ -62,7 +110,7 @@ const TestimonialsSection = () => {
 
     cards.forEach((card) => observer.observe(card));
     return () => observer.disconnect();
-  }, []);
+  }, [loading, testimonials]); // Re-run when loading state or testimonials change
 
   return (
     <section ref={sectionRef} className="py-16 lg:py-24 bg-card w-full">
@@ -81,33 +129,78 @@ const TestimonialsSection = () => {
           </p>
         </div>
 
-        {/* Grid */}
-        <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((t, idx) => (
-            <div
-              key={t.id}
-              style={{ transitionDelay: `${idx * 80}ms` }}
-              className="fade-in opacity-0 translate-y-6 transition-all duration-700 bg-background rounded-xl p-6 md:p-7 shadow-sm border border-border/50 relative overflow-hidden group"
-            >
-              {/* Accent bar */}
-              <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-primary/40" />
-              {/* Quote icon */}
-              <div className="absolute -right-6 -top-4 text-primary/10 text-8xl leading-none select-none font-serif">
-                "
-              </div>
-              <blockquote className="relative font-body text-foreground/90 leading-relaxed italic mb-5">
-                "{t.text}"
-              </blockquote>
-              <div className="relative">
-                <div className="font-heading font-semibold text-sm text-foreground">
-                  {t.author}
+        {/* Grid - with extra spacing for external quote marks */}
+        <div className="grid gap-6 md:gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 px-4 pt-8">
+          {loading
+            ? // Loading skeleton
+              Array.from({ length: 6 }).map((_, idx) => (
+                <div
+                  key={`skeleton-${idx}`}
+                  className="bg-background rounded-xl p-6 md:p-7 shadow-sm border border-border/50 relative overflow-hidden animate-pulse"
+                >
+                  <div className="absolute left-0 top-0 h-full w-1 bg-gray-200" />
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-200 rounded w-full" />
+                    <div className="h-4 bg-gray-200 rounded w-5/6" />
+                    <div className="h-4 bg-gray-200 rounded w-4/6" />
+                  </div>
+                  <div className="mt-5 space-y-2">
+                    <div className="h-3 bg-gray-200 rounded w-1/2" />
+                    <div className="h-2 bg-gray-200 rounded w-1/3" />
+                  </div>
                 </div>
-                <div className="text-xs font-caption text-muted-foreground mt-0.5 tracking-wide uppercase">
-                  {t.role}
+              ))
+            : testimonials.map((t, idx) => (
+                <div
+                  key={t.id}
+                  className="fade-in opacity-0 translate-y-6 transition-all duration-700 bg-background rounded-xl p-6 md:p-7 mt-6 mr-6 shadow-sm border border-border/50 relative overflow-visible group"
+                  style={{
+                    transitionDelay: `${idx * 80}ms`
+                  }}
+                >
+                  {/* Gradient left border with curved corners */}
+                  <div 
+                    className="absolute left-0 top-0 h-full w-1 pointer-events-none"
+                    style={{
+                      background: 'linear-gradient(135deg, #2C2825 0%, #D4A574 100%)',
+                      borderTopLeftRadius: '12px',
+                      borderBottomLeftRadius: '12px'
+                    }}
+                  ></div>
+                  
+                  {/* Large prominent quotation mark - positioned on the top right corner */}
+                  <div className="absolute -right-6 -top-6 z-10 pointer-events-none">
+                    <div className="relative">
+                      {/* Quote background with blog title gradient */}
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center shadow-lg" style={{
+                        background: 'linear-gradient(135deg, #2C2825 0%, #D4A574 100%)'
+                      }}>
+                        {/* Custom quotation mark image */}
+                        <img 
+                          src="/assets/images/quote-mark.png" 
+                          alt="Quote mark"
+                          className="w-8 h-8 object-contain filter brightness-0 invert"
+                        />
+                      </div>
+                      {/* Subtle glow effect with matching colors */}
+                      <div className="absolute inset-0 w-16 h-16 rounded-full opacity-30 blur-md -z-10" style={{
+                        background: 'linear-gradient(135deg, #2C2825 0%, #D4A574 100%)'
+                      }}></div>
+                    </div>
+                  </div>
+                  <blockquote className="relative font-body text-foreground/90 leading-relaxed italic mb-5">
+                    "{t.text}"
+                  </blockquote>
+                  <div className="relative">
+                    <div className="font-heading font-semibold text-sm text-foreground">
+                      {t.author}
+                    </div>
+                    <div className="text-xs font-caption text-muted-foreground mt-0.5 tracking-wide uppercase">
+                      {t.role}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          ))}
+              ))}
         </div>
 
         {/* Stats / Trust Indicators */}

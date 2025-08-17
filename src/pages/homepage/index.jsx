@@ -7,6 +7,7 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import BeforeAfterGallery from "./components/BeforeAfterGallery";
 import NewsletterSignup from "./components/NewsletterSignup";
 import Footer from "./components/Footer";
+import SanityTest from "../../components/SanityTest";
 
 const Homepage = () => {
   useEffect(() => {
