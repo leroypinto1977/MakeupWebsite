@@ -93,10 +93,10 @@ const TestimonialsSection = () => {
               <span className="absolute left-0 top-0 h-full w-1 bg-gradient-to-b from-primary to-primary/40" />
               {/* Quote icon */}
               <div className="absolute -right-6 -top-4 text-primary/10 text-8xl leading-none select-none font-serif">
-                “
+                "
               </div>
               <blockquote className="relative font-body text-foreground/90 leading-relaxed italic mb-5">
-                “{t.text}”
+                "{t.text}"
               </blockquote>
               <div className="relative">
                 <div className="font-heading font-semibold text-sm text-foreground">
