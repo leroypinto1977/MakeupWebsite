@@ -5,6 +5,7 @@ import service from './service'
 import testimonial from './testimonial'
 import portfolioImage from './portfolioImage'
 import siteSettings from './siteSettings'
+import transformation from './transformation'
 
 export const schemaTypes = [
   // Documents
@@ -15,4 +16,5 @@ export const schemaTypes = [
   testimonial,
   portfolioImage,
   siteSettings,
+  transformation,
 ]
