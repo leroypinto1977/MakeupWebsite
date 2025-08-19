@@ -15,4 +15,14 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
   },
+
+  cors: {
+    credentials: true,
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:4028',
+      'https://vibisha.vercel.app',
+      /^https:\/\/.*\.vercel\.app$/,
+    ],
+  },
 })
